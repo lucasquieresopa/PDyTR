@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <time.h>
 
 void error(const char *msg) {
     perror(msg);
@@ -38,6 +39,10 @@ int main(int argc, char *argv[]) {
     serv_addr.sin_port = htons(portno);
 	
     if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0) error("ERROR en connect");
+    
+    
+    clock_t tw0, tw1, tr0, tr1;
+    
 
     for (int exp = 1; exp <= 6; exp++) {
         size_t n = 1;
@@ -48,12 +53,35 @@ int main(int argc, char *argv[]) {
 
         memset(buffer, 'X', n);  // llena con datos 
 
+		
+		// ENVÍO
         int w = write(sockfd, buffer, n);
         if (w < 0) error("write");
 
         printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
+        
+        
+        // RECEPCIÓN
+        char *buffer_recv = malloc(256);
+        tr0 = clock();
+		int r = read(sockfd, buffer_recv, 255);
+		tr1 = clock();
+		double tr = ((double)(tr1-tr0))/CLOCKS_PER_SEC;
+		
+		//fprintf(fr, "%f\n", tr);
+
+		//buffer_recv[256] = '\0';
+		printf("El mensaje recibido es: %s\n", buffer_recv);
+		//printf("Se recibieron: %d bytes\n", n);
+		if (r < 0) {
+			error("ERROR reading from socket");
+			break;	 
+		}
+		
+        
 
         free(buffer);
+        free(buffer_recv);
     }
     
     close(sockfd);

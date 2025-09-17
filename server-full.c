@@ -48,18 +48,24 @@ int main(int argc, char *argv[]) {
         buffer = malloc(n);
         if (!buffer) error("malloc");
 	    
-	size_t total = 0;
+		size_t total = 0;
 	
-	// En este bucle se leen los datos en varias iteraciones
-	while (total < n){
-	    ssize_t r = read(newsockfd, buffer + total, n - total);
-	    if (r < 0) error("Read");
-	    if (r == 0) break;
-	    total += (ssize_t)r;
-	    printf("Leyendo cantidad: %zu\n", r);
-	}
+		// En este bucle se leen los datos en varias iteraciones
+		while (total < n){
+			ssize_t r = read(newsockfd, buffer + total, n - total);
+			if (r < 0) error("Read");
+			if (r == 0) break;
+			total += (ssize_t)r;
+			printf("Leyendo cantidad: %zu\n", r);
+		}
 
         printf("Servidor: recibido bloque de 10^%d = %zu bytes\n", exp, total);
+        
+        
+        // CONFIRMACIÓN DE RECEPCIÓN
+        
+        int w = write(newsockfd, "Se recibio el mensaje\0", 23);
+		if (w < 0) error("ERROR writing to socket");
 
         free(buffer);
     }
