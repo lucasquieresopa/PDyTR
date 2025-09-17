@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     
 
     for (int exp = 1; exp <= 6; exp++) {
-        size_t n = 1;
+        int n = 1;
         for (int i=0; i<exp; i++) n *= 10;  // 10^exp
 
         char *buffer = malloc(n);
@@ -57,33 +57,32 @@ int main(int argc, char *argv[]) {
 
         memset(buffer, 'X', n);  // llena con datos 
 
+
+		printf("%d\n\n", n);
 		
 		// ENVÍO
 		t0 = clock();
         int w = write(sockfd, buffer, n);
-
-        
         if (w < 0) error("write");
 
-        printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
+        printf("Cliente: enviado bloque de 10^%d = %d bytes\n", exp, w);
 
-        
-        
+
         
         // RECEPCIÓN
-
-		int r = read(sockfd, buffer, n);
-		t1 = clock();
-		double t = ((double)(t1-t0))/CLOCKS_PER_SEC;
+		int total = 0;
 		
-		
+		while (total < n){
+			int r = read(sockfd, buffer + total, n - total);
+			if (r < 0) error("Read");
+			if (r == 0) break;
+			total += r;
+			printf("Cliente: leyendo cantidad: %d/%d\n", r, n);
 
-
-		if (r < 0) {
-			error("ERROR reading from socket");
-			break;	 
 		}
-		printf("Recibi: %d bytes", r);
+		t1 = clock();
+		double t = (((double)(t1-t0))/CLOCKS_PER_SEC)/2;
+
 		printf("\nPING PONG: %lf\n\n", t);
 		fprintf(t_file, "%f\n", t);
 
@@ -93,7 +92,7 @@ int main(int argc, char *argv[]) {
  
     }
     
-    close(t_file);
+    fclose(t_file);
     close(sockfd);
     return 0;
 }

@@ -93,8 +93,8 @@ int main(int argc, char *argv[]) {
         free(buffer_recv);
     }
     
-    close(write_file);
-    close(read_file);
+    fclose(write_file);
+    fclose(read_file);
     close(sockfd);
     return 0;
 }

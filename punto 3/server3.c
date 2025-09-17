@@ -42,29 +42,33 @@ int main(int argc, char *argv[]) {
     if (newsockfd < 0) error("ERROR en accept");
 
     for (int exp = 1; exp <= 6; exp++) {
-        size_t n = 1;
+        int n = 1;
         for (int i=0; i<exp; i++) n *= 10;  // 10^exp
 
         buffer = malloc(n);
         if (!buffer) error("malloc");
 	    
 		int total = 0;
+		
+		printf("\n%d\n\n", n);
 	
-		// En este bucle se leen los datos en varias iteraciones
+		// RECEPCION
 		while (total < n){
 			int r = read(newsockfd, buffer + total, n - total);
 			if (r < 0) error("Read");
 			if (r == 0) break;
-			total += (ssize_t)r;
-			printf("Leyendo cantidad: %d\n", r);
+			total += r;
+			printf("Servidor: leyendo cantidad: %d/%d\n", r, n);
 			
 		}
 		
-		// ENVIO DE MISMA CANTIDAD
+		printf("Servidor: recibido bloque de 10^%d = %d bytes\n", exp, total);
+		
+		// ENVIO 
 	    int w = write(newsockfd, buffer, n);
 		if (w < 0) error("ERROR writing to socket");
 
-        printf("Servidor: recibido bloque de 10^%d = %zu bytes\n", exp, total);
+        printf("Servidor: enviado bloque de %d bytes\n", w);
         
         
        
