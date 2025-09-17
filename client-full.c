@@ -41,7 +41,11 @@ int main(int argc, char *argv[]) {
     if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0) error("ERROR en connect");
     
     
-    clock_t tw0, tw1, tr0, tr1;
+    
+    clock_t w0, w1, r0, r1;
+    
+    FILE *write_file = fopen("write_time.txt", "a");
+	FILE *read_file = fopen("read_time.txt", "a");
     
 
     for (int exp = 1; exp <= 6; exp++) {
@@ -55,30 +59,35 @@ int main(int argc, char *argv[]) {
 
 		
 		// ENVÍO
+		w0 = clock();
         int w = write(sockfd, buffer, n);
+		w1 = clock();
+		double write_time = ((double)(w1-w0))/CLOCKS_PER_SEC;
+        
         if (w < 0) error("write");
 
         printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
+        fprintf(write_file, "%f\n", write_time);
+        
         
         
         // RECEPCIÓN
         char *buffer_recv = malloc(256);
-        tr0 = clock();
+        r0 = clock();
 		int r = read(sockfd, buffer_recv, 255);
-		tr1 = clock();
-		double tr = ((double)(tr1-tr0))/CLOCKS_PER_SEC;
+		r1 = clock();
+		double read_time = ((double)(r1-r0))/CLOCKS_PER_SEC;
 		
-		//fprintf(fr, "%f\n", tr);
+		
 
-		//buffer_recv[256] = '\0';
-		printf("El mensaje recibido es: %s\n", buffer_recv);
-		//printf("Se recibieron: %d bytes\n", n);
+
 		if (r < 0) {
 			error("ERROR reading from socket");
 			break;	 
 		}
-		
-        
+		printf("El mensaje recibido es: %s\n", buffer_recv);
+		fprintf(read_file, "%f\n", read_time);
+
 
         free(buffer);
         free(buffer_recv);
