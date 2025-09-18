@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 
 		
 		// ENVÍO
-		w0 = dwalltime()();
+		w0 = dwalltime();
         int w = write(sockfd, buffer, n);
 		w1 = dwalltime();
 		double write_time = w1-w0 // CLOCKS_PER_SEC;
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
         r0 = dwalltime();
 		int r = read(sockfd, buffer_recv, 255);
 		r1 = dwalltime();
-		double read_time = (r1-r0) //CLOCKS_PER_SEC;
+		double read_time = (r1-r0); //CLOCKS_PER_SEC;
 		
 		
 
