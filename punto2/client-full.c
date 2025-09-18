@@ -6,11 +6,17 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <time.h>
+#include <sys/time.h>
 
 void error(const char *msg) {
     perror(msg);
     exit(0);
+}
+
+double dwalltime(){
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec + tv.tv_usec / 1000000.0;
 }
 
 int main(int argc, char *argv[]) {
@@ -42,7 +48,7 @@ int main(int argc, char *argv[]) {
     
     
     
-    clock_t w0, w1, r0, r1;
+    double w0, w1, r0, r1;
     
     FILE *write_file = fopen("write_time.txt", "a");
 	FILE *read_file = fopen("read_time.txt", "a");
@@ -59,10 +65,10 @@ int main(int argc, char *argv[]) {
 
 		
 		// ENVÍO
-		w0 = clock();
+		w0 = dwalltime()();
         int w = write(sockfd, buffer, n);
-		w1 = clock();
-		double write_time = ((double)(w1-w0))/CLOCKS_PER_SEC;
+		w1 = dwalltime();
+		double write_time = w1-w0 // CLOCKS_PER_SEC;
         
         if (w < 0) error("write");
 
@@ -73,10 +79,10 @@ int main(int argc, char *argv[]) {
         
         // RECEPCIÓN
         char *buffer_recv = malloc(256);
-        r0 = clock();
+        r0 = dwalltime();
 		int r = read(sockfd, buffer_recv, 255);
-		r1 = clock();
-		double read_time = ((double)(r1-r0))/CLOCKS_PER_SEC;
+		r1 = dwalltime();
+		double read_time = (r1-r0) //CLOCKS_PER_SEC;
 		
 		
 
