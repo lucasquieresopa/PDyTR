@@ -13,6 +13,12 @@ void error(const char *msg) {
     exit(0);
 }
 
+double dwalltime(){
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec + tv.tv_usec / 1000000.0;
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         fprintf(stderr,"Uso: %s <hostname> <puerto>\n", argv[0]);
@@ -61,7 +67,7 @@ int main(int argc, char *argv[]) {
 		printf("%d\n\n", n);
 		
 		// ENVÍO
-		t0 = clock();
+		t0 = dwalltime();
         int w = write(sockfd, buffer, n);
         if (w < 0) error("write");
 
@@ -80,8 +86,8 @@ int main(int argc, char *argv[]) {
 			printf("Cliente: leyendo cantidad: %d/%d\n", r, n);
 
 		}
-		t1 = clock();
-		double t = (((double)(t1-t0))/CLOCKS_PER_SEC)/2;
+		t1 = dwalltime();
+		double t = (t1-t0)/2;
 
 		printf("\nPING PONG: %lf\n\n", t);
 		fprintf(t_file, "%f\n", t);
