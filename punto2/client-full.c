@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 		w0 = dwalltime();
         int w = write(sockfd, buffer, n);
 		w1 = dwalltime();
-		double write_time = w1-w0 // CLOCKS_PER_SEC;
+		double write_time = w1-w0; // CLOCKS_PER_SEC;
         
         if (w < 0) error("write");
 
