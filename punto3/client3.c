@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     
     
     
-    clock_t t0, t1, t;
+    double t0, t1, t;
     
     FILE *t_file = fopen("pingpong.txt", "w");
 
