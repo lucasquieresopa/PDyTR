@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
     
     clock_t t0, t1, t;
     
-    FILE *t_file = fopen("pingpong.txt", "a");
+    FILE *t_file = fopen("pingpong.txt", "w");
 
     
 	for(int i =0; i<50; i++){
