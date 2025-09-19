@@ -50,8 +50,8 @@ int main(int argc, char *argv[]) {
     
     double w0, w1, r0, r1;
     
-    FILE *write_file = fopen("write_time.txt", "a");
-	FILE *read_file = fopen("read_time.txt", "a");
+    FILE *write_file = fopen("write_time.txt", "w");
+	FILE *read_file = fopen("read_time.txt", "w");
     for(int i = 0; i<50; i++){
 		for (int exp = 1; exp <= 6; exp++) {
 			size_t n = 1;
