@@ -53,52 +53,52 @@ int main(int argc, char *argv[]) {
     FILE *write_file = fopen("write_time.txt", "a");
 	FILE *read_file = fopen("read_time.txt", "a");
     
-
-    for (int exp = 1; exp <= 6; exp++) {
-        size_t n = 1;
-        for (int i=0; i<exp; i++) n *= 10;  // 10^exp
-
-        char *buffer = malloc(n);
-        if (!buffer) error("malloc");
-
-        memset(buffer, 'X', n);  // llena con datos 
-
-		
-		// ENVÍO
-		w0 = dwalltime();
-        int w = write(sockfd, buffer, n);
-		w1 = dwalltime();
-		double write_time = w1-w0; // CLOCKS_PER_SEC;
-        
-        if (w < 0) error("write");
-
-        printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
-        fprintf(write_file, "%f\n", write_time);
-        
-        
-        
-        // RECEPCIÓN
-        char *buffer_recv = malloc(256);
-        r0 = dwalltime();
-		int r = read(sockfd, buffer_recv, 255);
-		r1 = dwalltime();
-		double read_time = (r1-r0); //CLOCKS_PER_SEC;
-		
-		
-
-
-		if (r < 0) {
-			error("ERROR reading from socket");
-			break;	 
-		}
-		printf("El mensaje recibido es: %s\n", buffer_recv);
-		fprintf(read_file, "%f\n", read_time);
-
-
-        free(buffer);
-        free(buffer_recv);
-    }
-    
+	for(int i=0; i<6; i++){
+	    for (int exp = 1; exp <= 6; exp++) {
+	        size_t n = 1;
+	        for (int i=0; i<exp; i++) n *= 10;  // 10^exp
+	
+	        char *buffer = malloc(n);
+	        if (!buffer) error("malloc");
+	
+	        memset(buffer, 'X', n);  // llena con datos 
+	
+			
+			// ENVÍO
+			w0 = dwalltime();
+	        int w = write(sockfd, buffer, n);
+			w1 = dwalltime();
+			double write_time = w1-w0; // CLOCKS_PER_SEC;
+	        
+	        if (w < 0) error("write");
+	
+	        printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
+	        fprintf(write_file, "%f\n", write_time);
+	        
+	        
+	        
+	        // RECEPCIÓN
+	        char *buffer_recv = malloc(256);
+	        r0 = dwalltime();
+			int r = read(sockfd, buffer_recv, 255);
+			r1 = dwalltime();
+			double read_time = (r1-r0); //CLOCKS_PER_SEC;
+			
+			
+	
+	
+			if (r < 0) {
+				error("ERROR reading from socket");
+				break;	 
+			}
+			printf("El mensaje recibido es: %s\n", buffer_recv);
+			fprintf(read_file, "%f\n", read_time);
+	
+	
+	        free(buffer);
+	        free(buffer_recv);
+	    }
+	}	
     fclose(write_file);
     fclose(read_file);
     close(sockfd);
