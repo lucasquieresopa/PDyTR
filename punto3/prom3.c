@@ -18,6 +18,7 @@ int main(){
 	// se calcula el promedio para cada una de las 6 métricas
 	for(int i = 1; i<7; i++){
 		int s = (int)(pow(10, i)+0.5);
+		fprintf(f, "%lf\n", (val[i-1] / j));
 		printf("Para %d : %lf\n", s, (val[i-1] / j));
 	}
 	
