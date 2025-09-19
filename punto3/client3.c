@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     FILE *t_file = fopen("pingpong.txt", "a");
 
     
-
+	for(int i =0; i<50; i++){
     for (int exp = 1; exp <= 6; exp++) {
         int n = 1;
         for (int i=0; i<exp; i++) n *= 10;  // 10^exp
@@ -97,6 +97,7 @@ int main(int argc, char *argv[]) {
         free(buffer);
  
     }
+	}
     
     fclose(t_file);
     close(sockfd);
