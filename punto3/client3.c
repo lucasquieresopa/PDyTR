@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <time.h>
+#include <sys/time.h>
 
 void error(const char *msg) {
     perror(msg);
@@ -97,6 +97,7 @@ int main(int argc, char *argv[]) {
         free(buffer);
  
     }
+		printf("%d\n", i);
 	}
     
     fclose(t_file);
