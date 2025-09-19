@@ -4,7 +4,7 @@
 int main() {
     FILE *rf = fopen("read_time.txt", "r");
     FILE *wf = fopen("write_time.txt", "r");
-
+    FILE *prom_file = fopen("prom_file.txt", "a");
 
     double aux, rt[6] = {0}, wt[6] = {0}; // arreglo de 6 pos, una por métrica
     int j_read = 0, j_write = 0;
@@ -46,6 +46,7 @@ int main() {
     printf("\nRESULTADOS DEL WRITE: \n");
     for (int i = 0; i < 6; i++) {
    		int s = (int)(pow(10, i)+0.5);
+        fprintf(prom_file, "%f\n", prom_file);
         printf("Para métrica %d : %lf\n", s, (wt[i] / j_write));
     }
 
