@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     FILE *t_file = fopen("pingpong.txt", "w");
 
     
-	for(int i =0; i<50; i++){
+	for(int i =0; i<6; i++){
     for (int exp = 1; exp <= 6; exp++) {
         int n = 1;
         for (int i=0; i<exp; i++) n *= 10;  // 10^exp
