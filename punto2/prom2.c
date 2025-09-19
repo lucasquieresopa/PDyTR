@@ -46,7 +46,7 @@ int main() {
     printf("\nRESULTADOS DEL WRITE: \n");
     for (int i = 0; i < 6; i++) {
    		int s = (int)(pow(10, i)+0.5);
-        fprintf(prom_file, "%lf\n", prom_file);
+        fprintf(prom_file, "%lf\n", (wt[i] / j_write));
         printf("Para métrica %d : %lf\n", s, (wt[i] / j_write));
     }
 
