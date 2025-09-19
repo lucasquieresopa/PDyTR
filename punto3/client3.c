@@ -54,50 +54,51 @@ int main(int argc, char *argv[]) {
 
     
 	for(int i =0; i<6; i++){
-    for (int exp = 1; exp <= 6; exp++) {
-        int n = 1;
-        for (int i=0; i<exp; i++) n *= 10;  // 10^exp
-
-        char *buffer = malloc(n);
-        if (!buffer) error("malloc");
-
-        memset(buffer, 'X', n);  // llena con datos 
-
-
-		printf("%d\n\n", n);
-		
-		// ENVÍO
-		t0 = dwalltime();
-        int w = write(sockfd, buffer, n);
-        if (w < 0) error("write");
-
-        printf("Cliente: enviado bloque de 10^%d = %d bytes\n", exp, w);
-
-
-        
-        // RECEPCIÓN
-		int total = 0;
-		
-		while (total < n){
-			int r = read(sockfd, buffer + total, n - total);
-			if (r < 0) error("Read");
-			if (r == 0) break;
-			total += r;
-			printf("Cliente: leyendo cantidad: %d/%d\n", r, n);
-
-		}
-		t1 = dwalltime();
-		double t = (t1-t0)/2;
-
-		printf("\nPING PONG: %lf\n\n", t);
-		fprintf(t_file, "%f\n", t);
-
-		
-
-        free(buffer);
- 
-    }
 		printf("%d\n", i);
+	    for (int exp = 1; exp <= 6; exp++) {
+	        int n = 1;
+	        for (int i=0; i<exp; i++) n *= 10;  // 10^exp
+	
+	        char *buffer = malloc(n);
+	        if (!buffer) error("malloc");
+	
+	        memset(buffer, 'X', n);  // llena con datos 
+	
+	
+			printf("%d\n\n", n);
+			
+			// ENVÍO
+			t0 = dwalltime();
+	        int w = write(sockfd, buffer, n);
+	        if (w < 0) error("write");
+	
+	        printf("Cliente: enviado bloque de 10^%d = %d bytes\n", exp, w);
+	
+	
+	        
+	        // RECEPCIÓN
+			int total = 0;
+			
+			while (total < n){
+				int r = read(sockfd, buffer + total, n - total);
+				if (r < 0) error("Read");
+				if (r == 0) break;
+				total += r;
+				printf("Cliente: leyendo cantidad: %d/%d\n", r, n);
+	
+			}
+			t1 = dwalltime();
+			double t = (t1-t0)/2;
+	
+			printf("\nPING PONG: %lf\n\n", t);
+			fprintf(t_file, "%f\n", t);
+	
+			
+	
+	        free(buffer);
+	 
+	    }
+		
 	}
     
     fclose(t_file);
