@@ -1,0 +1,53 @@
+Vagrant.configure("2") do |config|
+	# Variables del repositorio y el path donde se baja
+	REPO_URL = ENV.fetch('REPO_URL', 'https://github.com/lucasquieresopa/PDyTR.git')
+	REPO_DIR = '/opt/pdytr'
+
+	# Definición de las máquinas
+	2.times do |num|
+		idx = num + 1
+		name = "vm#{idx}"
+		ip = "192.168.56.#{10 + idx}"	# Asignación de las IP para las máquinas. vm1 : .11 ; vm2 : .12
+		config.vm.define ("vm%01d"  % (num + 1)) do |machine|
+		      	machine.vm.box = "ubuntu/focal64"
+		      	machine.vm.network "private_network", ip: ip
+		      	machine.vm.hostname = "vm#{num+1}"
+
+		      	machine.vm.provider "virtualbox" do |vb|
+				vb.memory = "512"
+				vb.name = "vm#{num+1}"
+	      		end
+
+			machine.vm.provision "shell", inline: <<-SHELL
+			# Get updated urls/packages sources? & tools
+			apt-get update
+
+			# Get several software packages
+			apt-get install -y net-tools debconf-utils joe zip libc-dev-bin build-essential default-jdk
+
+			# The alias for ls
+			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
+
+			# Clonar/actualizar el repositorio en /opt/pdytr
+			if [ ! -d "#{REPO_DIR}/.git" ]; then
+			  git clone "#{REPO_URL}" "#{REPO_DIR}"
+			else
+			  cd "#{REPO_DIR}" && git pull --ff-only || true
+			fi
+
+			# Disparar el script para ejecutar los experimentos
+
+			# Permisos de trabajo para el usuario vagrant
+			chown -R vagrant:vagrant "#{REPO_DIR}"
+			SHELL
+
+			if name == "vm1"	# Servidor
+				puts ">> Escribiendo desde el servidor, dirección : #{ip}"
+			elsif name == "vm2"	# Cliente
+				puts ">> Escribiendo desde el cliente, dirección : #{ip}"
+			else
+				puts ">> Error"
+			end
+		end
+	end
+end
