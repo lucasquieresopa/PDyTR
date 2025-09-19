@@ -49,6 +49,6 @@ int main() {
         fprintf(prom_file, "%lf\n", (wt[i] / j_write));
         printf("Para métrica %d : %lf\n", s, (wt[i] / j_write));
     }
-
+    fclose(prom_file);
     return 0;
 }
