@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
     if (newsockfd < 0) error("ERROR en accept");
-
+	for(int i = 0; i<6; i++){
     for (int exp = 1; exp <= 6; exp++) {
         size_t n = 1;
         for (int i=0; i<exp; i++) n *= 10;  // 10^exp
@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
 
         free(buffer);
     }
+	}
 		
     close(newsockfd);
     close(sockfd);
