@@ -41,34 +41,34 @@ int main(int argc, char *argv[]) {
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
     if (newsockfd < 0) error("ERROR en accept");
 	for(int i = 0; i<6; i++){
-    for (int exp = 1; exp <= 6; exp++) {
-        size_t n = 1;
-        for (int i=0; i<exp; i++) n *= 10;  // 10^exp
-
-        buffer = malloc(n);
-        if (!buffer) error("malloc");
-	    
-		size_t total = 0;
+	    for (int exp = 1; exp <= 6; exp++) {
+	        size_t n = 1;
+			for (int i=0; i<exp; i++) n *= 10;  // 10^exp
 	
-		// En este bucle se leen los datos en varias iteraciones
-		while (total < n){
-			ssize_t r = read(newsockfd, buffer + total, n - total);
-			if (r < 0) error("Read");
-			if (r == 0) break;
-			total += (ssize_t)r;
-			printf("Leyendo cantidad: %zu\n", r);
+			buffer = malloc(n);
+			if (!buffer) error("malloc");
+			
+			size_t total = 0;
+		
+			// En este bucle se leen los datos en varias iteraciones
+			while (total < n){
+				ssize_t r = read(newsockfd, buffer + total, n - total);
+				if (r < 0) error("Read");
+				if (r == 0) break;
+				total += (ssize_t)r;
+				printf("Leyendo cantidad: %zu\n", r);
+			}
+	
+			printf("Servidor: recibido bloque de 10^%d = %zu bytes\n", exp, total);
+			
+			
+			// CONFIRMACIÓN DE RECEPCIÓN
+			
+			int w = write(newsockfd, "Se recibio el mensaje\0", 23);
+			if (w < 0) error("ERROR writing to socket");
+	
+			free(buffer);
 		}
-
-        printf("Servidor: recibido bloque de 10^%d = %zu bytes\n", exp, total);
-        
-        
-        // CONFIRMACIÓN DE RECEPCIÓN
-        
-        int w = write(newsockfd, "Se recibio el mensaje\0", 23);
-		if (w < 0) error("ERROR writing to socket");
-
-        free(buffer);
-    }
 	}
 		
     close(newsockfd);
