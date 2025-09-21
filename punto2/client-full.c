@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
 			
 			if (w < 0) error("write");
 	
-			printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, w);
+			printf("Cliente: enviado bloque de 10^%d = %zu bytes\n", exp, (size_t) w);
 			fprintf(write_file, "%f\n", write_time);
 			
 			
