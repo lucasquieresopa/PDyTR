@@ -1,8 +1,4 @@
 Vagrant.configure("2") do |config|
-	# Variables del repositorio y el path donde se baja
-	REPO_URL = ENV.fetch('REPO_URL', 'https://github.com/lucasquieresopa/PDyTR.git')
-	REPO_DIR = '/opt/pdytr'
-
 	# Definición de las máquinas
 	config.vm.define "vm1" do |machine|	# vm1 va a ser el que ejecute los programas de servidor
 
@@ -28,21 +24,8 @@ Vagrant.configure("2") do |config|
 			The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			Clonar/actualizar el repositorio en /opt/pdytr
-			if [ ! -d "#{REPO_DIR}/.git" ]; then
-			  git clone "#{REPO_URL}" "#{REPO_DIR}"
-			else
-			  cd "#{REPO_DIR}" && git pull --ff-only || true
-			fi
+			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
 
-			# Punto de sincronizacion
-			# Disparar el script para ejecutar los experimentos
-
-			sudo chmod +x /opt/pdytr/punto4/servidor.sh
-			bash /opt/pdytr/punto4/servidor.sh
-
-			# Permisos de trabajo para el usuario vagrant
-			chown -R vagrant:vagrant "#{REPO_DIR}"
 		SHELL
 	end
 
@@ -61,25 +44,20 @@ Vagrant.configure("2") do |config|
 	      	end
 
 	      	machine.vm.provision "shell", inline: <<-SHELL
-			# Get updated urls/packages sources? & tools
+			Get updated urls/packages sources? & tools
 			apt-get update
 
-			# Get several software packages
+			Get several software packages
 			apt-get install -y net-tools debconf-utils joe zip libc-dev-bin build-essential default-jdk
 
-			# The alias for ls
+			The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			# Clonar/actualizar el repositorio en /opt/pdytr
-			if [ ! -d "#{REPO_DIR}/.git" ]; then
-			  git clone "#{REPO_URL}" "#{REPO_DIR}"
-			else
-			  cd "#{REPO_DIR}" && git pull --ff-only || true
-			fi
+			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
 
-			# Disparar el script para ejecutar los experimentos
+			Disparar el script para ejecutar los experimentos
 
-			# Punto de sincronizacion
+			Punto de sincronizacion
 			echo "Esperando a que el servidor (vm1) esté disponible..."
 
 			while true; do
@@ -93,12 +71,6 @@ Vagrant.configure("2") do |config|
 			done
 
 		    	echo "Servidor arriba, ahora ejecuto cliente"
-
-			sudo chmod +x /opt/pdytr/punto4/cliente.sh
-			bash /opt/pdytr/punto4/cliente.sh
-
-			# Permisos de trabajo para el usuario vagrant
-			chown -R vagrant:vagrant "#{REPO_DIR}"
 		SHELL
 	end
 end
