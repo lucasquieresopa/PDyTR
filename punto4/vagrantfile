@@ -15,16 +15,31 @@ Vagrant.configure("2") do |config|
 	      	end
 
 	      	machine.vm.provision "shell", inline: <<-SHELL
-			Get updated urls/packages sources? & tools
+			# Get updated urls/packages sources? & tools
 			apt-get update
 
-			Get several software packages
+			# Get several software packages
 			apt-get install -y net-tools debconf-utils joe zip libc-dev-bin build-essential default-jdk
 
-			The alias for ls
+			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
+			sudo rm -rf /opt/pdytr
 			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
+
+
+			# Disparamos el script
+
+			# Ejecucion punto 2
+			cd /opt/pdytr/punto2/
+			gcc -o servidor server-full.c
+			./servidor 6901 &
+
+			# Ejecucion punto 3
+			cd /opt/pdytr/punto3/
+			gcc -o servidor server3.c
+			./servidor 6902 &
+
 
 		SHELL
 	end
@@ -44,20 +59,21 @@ Vagrant.configure("2") do |config|
 	      	end
 
 	      	machine.vm.provision "shell", inline: <<-SHELL
-			Get updated urls/packages sources? & tools
+			# Get updated urls/packages sources? & tools
 			apt-get update
 
-			Get several software packages
+			# Get several software packages
 			apt-get install -y net-tools debconf-utils joe zip libc-dev-bin build-essential default-jdk
 
-			The alias for ls
+			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
+			sudo rm -rf /opt/pdytr
 			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
 
-			Disparar el script para ejecutar los experimentos
+			# Disparar el script para ejecutar los experimentos
 
-			Punto de sincronizacion
+			# Punto de sincronizacion
 			echo "Esperando a que el servidor (vm1) esté disponible..."
 
 			while true; do
@@ -69,8 +85,18 @@ Vagrant.configure("2") do |config|
 			    		sleep 2
 			  	fi
 			done
-
 		    	echo "Servidor arriba, ahora ejecuto cliente"
+
+			# Ejecucion punto 2
+			cd /opt/pdytr/punto2/
+			gcc -o cliente client-full.c
+			./cliente 192.168.56.11 6901
+
+			# Ejecucion punto 3
+			cd /opt/pdytr/punto3/
+			gcc -o cliente client3.c
+			./cliente 192.168.56.11 6902
+
 		SHELL
 	end
 end
