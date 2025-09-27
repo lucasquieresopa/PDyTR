@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     
     FILE *write_file = fopen("write_time.txt", "w");
 	FILE *read_file = fopen("read_time.txt", "w");
-    for(int i = 0; i<6; i++){
+    for(int i = 0; i<50; i++){
 		for (int exp = 1; exp <= 6; exp++) {
 			size_t n = 1;
 			for (int i=0; i<exp; i++) n *= 10;  // 10^exp
@@ -90,6 +90,7 @@ int main(int argc, char *argv[]) {
 				error("ERROR reading from socket");
 				break;	 
 			}
+			buffer_recv[r] = '\0';
 			printf("El mensaje recibido es: %s\n", buffer_recv);
 			fprintf(read_file, "%f\n", read_time);
 	
