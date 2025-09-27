@@ -16,4 +16,6 @@ gcc -o servidor server3.c
 
 # Levanto la máquina que va a ejecutar el cliente
 
+cd ..
 cd punto4-b
+vagrant up

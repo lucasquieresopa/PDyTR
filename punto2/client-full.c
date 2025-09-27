@@ -20,6 +20,7 @@ double dwalltime(){
 }
 
 int main(int argc, char *argv[]) {
+printf("EJECUTANDO EL PUNTO 2, SOY UN CLIENTE");
     if (argc < 3) {
         fprintf(stderr,"Uso: %s <hostname> <puerto>\n", argv[0]);
         exit(0);
@@ -103,5 +104,6 @@ int main(int argc, char *argv[]) {
     fclose(write_file);
     fclose(read_file);
     close(sockfd);
+    printf("CLIENTE PUNTO 2 FINALIZA EJECUCION");
     return 0;
 }
