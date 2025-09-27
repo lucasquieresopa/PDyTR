@@ -53,6 +53,7 @@ printf("EJECUTANDO EL PUNTO 2, SOY UN CLIENTE\n\n");
     
     FILE *write_file = fopen("write_time.txt", "w");
 	FILE *read_file = fopen("read_time.txt", "w");
+	for(int i=0; i<6; i++){
 		for (int exp = 1; exp <= 6; exp++) {
 			size_t n = 1;
 			for (int i=0; i<exp; i++) n *= 10;  // 10^exp
@@ -98,7 +99,7 @@ printf("EJECUTANDO EL PUNTO 2, SOY UN CLIENTE\n\n");
 			free(buffer);
 			free(buffer_recv);
 		}
-
+	}
     fclose(write_file);
     fclose(read_file);
     close(sockfd);
