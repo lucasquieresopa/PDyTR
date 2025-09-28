@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
 			# Ejecucion punto 3
 			echo "EJECUTO P3 SERVIDOR"
 			cd /home/pdytr/punto3
-			sudo chmod +x servidor2.sh
+			sudo chmod +x servidor3.sh
 			./servidor3.sh
 			echo "TERMINA P3 SERVIDOR"
 
