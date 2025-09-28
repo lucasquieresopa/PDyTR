@@ -5,6 +5,7 @@ while true; do
 			echo "PUNTO 2: CLIENTE" 
 			break;
 		fi
+		sleep 1
 	done
 			
 # Ejecucion punto 2

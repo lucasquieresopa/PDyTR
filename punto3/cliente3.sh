@@ -1,10 +1,11 @@
 #!/bin/bash
 
 while true; do
-				if nc -zv 192.168.56.11 6901; then
+				if nc -zv 192.168.56.11 6902; then
 					echo "PUNTO 3: CLIENTE" 
 					break;
 				fi
+				sleep 1
 			done
 # Ejecucion punto 3
 cd /opt/pdytr/punto3
