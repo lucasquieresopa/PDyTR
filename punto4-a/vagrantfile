@@ -24,15 +24,15 @@ Vagrant.configure("2") do |config|
 			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			sudo rm -rf /opt/pdytr
-			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
+			sudo rm -rf /home/pdytr
+			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
 			echo Compilando programas...
 
-			cd /opt/pdytr/punto2
+			cd /home/pdytr/punto2
 			gcc -o servidor server-full.c
 
-			cd /opt/pdytr/punto3
+			cd /home/pdytr/punto3
 			gcc -o servidor server3.c
 
 			echo Programas compilados
@@ -64,8 +64,8 @@ Vagrant.configure("2") do |config|
 			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			sudo rm -rf /opt/pdytr
-			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
+			sudo rm -rf /home/pdytr
+			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
 			# Disparar el script para ejecutar los experimentos
 
@@ -85,10 +85,10 @@ Vagrant.configure("2") do |config|
 
 		    	echo Compilando programas...
 
-		    	cd /opt/pdytr/punto2
+		    	cd /home/pdytr/punto2
 			gcc -o cliente client-full.c
 
-			cd /opt/pdytr/punto3
+			cd /home/pdytr/punto3
 			gcc -o cliente client3.c
 			
 			echo Programas compilados

@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
 			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			sudo rm -rf /opt/pdytr
+			sudo rm -rf /home/pdytr
 			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
 
