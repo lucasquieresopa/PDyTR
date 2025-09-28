@@ -1,21 +1,39 @@
 #!/bin/bash
 
-# Dejo ejecutando el punto 2
+# Inicializo la maquina cliente (vm3)
+
+vagrant up --provision
+
+# Ejecución del punto 2
 
 cd ..
 cd punto2
 gcc -o servidor server-full.c
-./servidor 6901 &
+./servidor 6911 &
 
-# Dejo ejecutando el punto 3
+# Esperar al host hasta que el puerto esté en LISTEN (no consume conexiones)
+echo "Esperando a que el servidor escuche en 6911..."
+until ss -lnt 'sport = :6901' | grep -q LISTEN >/dev/null 2>&1; do
+  sleep 0.5
+done
+
+cd ..
+cd punto4-b
+vagrant ssh vm3 -c "/opt/pdytr/punto2/cliente 10.0.2.2 6911"
+
+# Ejecución del punto 3
 
 cd ..
 cd punto3
 gcc -o servidor server3.c
-./servidor 6902 &
+./servidor 6912 &
 
-# Levanto la máquina que va a ejecutar el cliente
+# Esperar al host hasta que el puerto esté en LISTEN (no consume conexiones)
+echo "Esperando a que el servidor escuche en 6912..."
+until ss -lnt 'sport = :6912' | grep -q LISTEN >/dev/null 2>&1; do
+  sleep 0.5
+done
 
 cd ..
 cd punto4-b
-vagrant up
+vagrant ssh vm3 -c "/opt/pdytr/punto3/cliente 10.0.2.2 6912"

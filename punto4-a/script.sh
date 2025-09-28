@@ -2,7 +2,7 @@
 
 # vagrant up --provision
 
-# Ejecucion del punto 4-a
+# Ejecucion del punto 2
 
 vagrant ssh vm1 -c "/opt/pdytr/punto2/servidor 6901" &
 
@@ -17,7 +17,7 @@ echo "Servidor listo, arrancando cliente"
 
 vagrant ssh vm2 -c "/opt/pdytr/punto2/cliente 192.168.56.11 6901"
 
-# Ejecucion del punto 4-b
+# Ejecucion del punto 3
 
 vagrant ssh vm1 -c "/opt/pdytr/punto3/servidor 6902" &
 
