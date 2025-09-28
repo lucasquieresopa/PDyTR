@@ -13,7 +13,7 @@ gcc -o servidor server-full.c
 
 # Esperar al host hasta que el puerto esté en LISTEN (no consume conexiones)
 echo "Esperando a que el servidor escuche en 6911..."
-until ss -lnt 'sport = :6901' | grep -q LISTEN >/dev/null 2>&1; do
+until ss -lnt 'sport = :6911' | grep -q LISTEN >/dev/null 2>&1; do
   sleep 0.5
 done
 
