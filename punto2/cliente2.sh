@@ -4,7 +4,7 @@ cd /home/pdytr/punto2
 gcc -o cliente client-full.c
 
 while true; do
-    ./cliente 192.168.56.11 6902
+    ./cliente 192.168.56.11 6901
     rc=$?
     if [ $rc -eq 0 ]; then
         echo "PUNTO 2: CLIENTE" 
