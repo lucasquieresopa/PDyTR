@@ -24,18 +24,22 @@ Vagrant.configure("2") do |config|
 			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			sudo rm -rf /home/pdytr
-			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
+			sudo rm -rf /opt/pdytr
+			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
 
-			echo Compilando programas...
 
-			cd /home/pdytr/punto2
-			gcc -o servidor server-full.c
+			# Disparamos el script
+			echo "EJECUTO P2 SERVIDOR"
+			cd /opt/pdytr/punto2
+			./servidor2.sh
+			echo "CONTINUO P2 SERVIDOR"
 
-			cd /home/pdytr/punto3
-			gcc -o servidor server3.c
+			# Ejecucion punto 3
+			echo "EJECUTO P3 SERVIDOR"
+			cd /opt/pdytr/punto3
+			./servidor3.sh
+			echo "TERMINA P3 SERVIDOR"
 
-			echo Programas compilados
 
 		SHELL
 	end
@@ -64,8 +68,8 @@ Vagrant.configure("2") do |config|
 			# The alias for ls
 			grep -q "alias ls='ls -la'" /home/vagrant/.bashrc || echo -e "\\nalias ls='ls -la'" >> /home/vagrant/.bashrc
 
-			sudo rm -rf /home/pdytr
-			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
+			sudo rm -rf /opt/pdytr
+			git clone https://github.com/lucasquieresopa/PDyTR.git /opt/pdytr
 
 			# Disparar el script para ejecutar los experimentos
 
@@ -83,15 +87,17 @@ Vagrant.configure("2") do |config|
 			done
 		    	echo "Servidor arriba, ahora ejecuto cliente"
 
-		    	echo Compilando programas...
+			# En este punto no se garantiza que el servidor esté ejecutando el programa
 
-		    	cd /home/pdytr/punto2
-			gcc -o cliente client-full.c
-
-			cd /home/pdytr/punto3
-			gcc -o cliente client3.c
+			echo "EJECUCION P2 CLIENTE"
+			cd /opt/pdytr/punto2
+			./cliente2.sh
+			echo "TEMRINA EJEC P2 CLIENTE"
+			echo "EJECUCION P3 CLIENTE"
+			cd /opt/pdytr/punto3
+			./cliente3.sh
+			echo "TERMINA P3 CLIENTE"
 			
-			echo Programas compilados
 
 		SHELL
 	end
