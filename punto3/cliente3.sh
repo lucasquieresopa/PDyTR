@@ -7,9 +7,9 @@ while true; do
     ./cliente 192.168.56.11 6902
     rc=$?
     if [ $rc -eq 0 ]; then
-        echo "CLIENTE: conexión/ejecución exitosa."
+        echo "PUNTO 3: CLIENTE" 
         break
     fi
-    echo "CLIENTE: fallo al conectar (exit $rc). Reintentando en 1s..."
+    echo "CLIENTE: fallo al conectar. PERO NO ME RENDIRE! ESA CONEXION SE HARA DEMONIOS"
     sleep 1
 done
