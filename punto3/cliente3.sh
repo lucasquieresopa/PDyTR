@@ -8,6 +8,6 @@ while true; do
 				sleep 1
 			done
 # Ejecucion punto 3
-cd /opt/pdytr/punto3
+cd /home/pdytr/punto3
 gcc -o cliente client3.c
 ./cliente 192.168.56.11 6902
