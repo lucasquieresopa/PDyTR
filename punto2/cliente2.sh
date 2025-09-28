@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /home/pdytr/punto2
-gcc -o cliente client2.c
+gcc -o cliente client-full.c
 
 while true; do
     ./cliente 192.168.56.11 6902
