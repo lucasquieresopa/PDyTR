@@ -12,7 +12,7 @@ void error(const char *msg) {
 }
 
 int main(int argc, char *argv[]) {
-		printf("EJECUTANDO EL PUNTO 3, SOY UN SERVER\n\n");
+		printf("EJECUTANDO EL PUNTO 2, SOY UN SERVER\n\n");
     if (argc < 2) {
         fprintf(stderr, "Uso: %s <puerto>\n", argv[0]);
         exit(1);

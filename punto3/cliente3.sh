@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-				if netstat -tuln | grep :6902; then
+				if netstat -tuln | grep -q :6902; then
 					echo "PUNTO 3: CLIENTE" 
 					break;
 				fi
