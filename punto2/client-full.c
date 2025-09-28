@@ -53,6 +53,15 @@ printf("EJECUTANDO EL PUNTO 2, SOY UN CLIENTE\n\n");
     
     FILE *write_file = fopen("write_time.txt", "w");
 	FILE *read_file = fopen("read_time.txt", "w");
+	
+	if (!write_file) {
+    perror("No se pudo abrir el archivo");
+    exit(1);
+	}
+	if (!read_file) {
+    perror("No se pudo abrir el archivo");
+    exit(1);
+	}
 	for(int i=0; i<6; i++){
 		for (int exp = 1; exp <= 6; exp++) {
 			size_t n = 1;
