@@ -28,15 +28,16 @@ Vagrant.configure("2") do |config|
 			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
 
-			# Ejecucion punto 2
-			cd /home/pdytr/punto2/
-			sudo gcc -o cliente client-full.c
-			./cliente 10.0.2.2 6901
-
-			# Ejecucion punto 3
-			cd /home/pdytr/punto3/
-			sudo gcc -o cliente client3.c
-			./cliente 10.0.2.2 6902
+			echo "EJECUCION P2 CLIENTE"
+			cd /home/pdytr/punto2
+			sudo chmod +x cliente2.sh
+			./cliente2.sh
+			echo "TEMRINA EJEC P2 CLIENTE"
+			echo "EJECUCION P3 CLIENTE"
+			cd /home/pdytr/punto3
+			sudo chmod +x cliente3.sh
+			./cliente3.sh
+			echo "TERMINA P3 CLIENTE"
 
 			
 			cd /home/pdytr/punto2/
