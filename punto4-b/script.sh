@@ -19,7 +19,7 @@ done
 
 cd ..
 cd punto4-b
-vagrant ssh vm3 -c "/opt/pdytr/punto2/cliente 10.0.2.2 6911"
+vagrant ssh vm3 -c "/home/pdytr/punto2/cliente 10.0.2.2 6911"
 
 # Ejecución del punto 3
 
@@ -36,4 +36,4 @@ done
 
 cd ..
 cd punto4-b
-vagrant ssh vm3 -c "/opt/pdytr/punto3/cliente 10.0.2.2 6912"
+vagrant ssh vm3 -c "/home/pdytr/punto3/cliente 10.0.2.2 6912"
