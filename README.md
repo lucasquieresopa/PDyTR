@@ -76,6 +76,25 @@ cat pingpong.txt	# Para ver los tiempos del RTT
 cat time_pp.txt		$ Para ver los tiempos promedio del RTT
 ```
 
+### Ejercicio 5)
+
+Para correr el experimento:
+
+```bash
+cd ./pdytr/punto5	# Ubicarse en la carpeta donde se encuentra el proyecto
+vagrant up
+
+```
+
+En todos los casos, los resultados son impesos por la terminal. Aún asi, se puede acceder a los .txt ingresando mediante
+ssh a la vm5
+
+```bash
+cd ./pdytr/punto5/escenario-N	# Siendo N entre 1 y 4
+cat pingpong.txt		# Para ver los tiempos del RTT
+cat time_pp.txt			# Para ver los tiempos promedio del RTT
+```
+
 ## Posibles errores y posibles soluciones
 
 ### Error porque la máquina está usando kvm en modo root
