@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
 			sudo rm -rf /home/pdytr
 			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
-
+			sudo chown -R vagrant:vagrant /home
 			echo "EJECUCION P2 CLIENTE"
 			cd /home/pdytr/punto2
 			sudo chmod +x cliente2.sh
