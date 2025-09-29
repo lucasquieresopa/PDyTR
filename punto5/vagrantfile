@@ -92,6 +92,12 @@ Vagrant.configure("2") do |config|
 			./cliente1.sh
 			echo "#### Cliente : Escenario 1 ejecutado, fin de la conexión ####"
 
+			echo "#### Cliente : Escenario 2 en ejecución ####"
+			cd /home/pdytr/punto5/escenario-2
+			sudo chmod +x cliente2.sh
+			./cliente2.sh
+			echo "#### Cliente : Escenario 2 ejecutado, fin de la conexión ####"
+
 			echo "#### Cliente : Promedios calculados para el escenario 1 ####"
 			cd /home/pdytr/punto5/escenario-1
 			sudo gcc -o prom1 prom1.c -lm
