@@ -23,7 +23,7 @@ double dwalltime(){
 
 int main(int argc, char *argv[]) {
 
-    // signal(SIGPIPE, SIG_IGN);
+    signal(SIGPIPE, SIG_IGN);
 
     if (argc < 3) {
         fprintf(stderr,"Uso: %s <hostname> <puerto>\n", argv[0]);
