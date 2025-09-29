@@ -7,6 +7,8 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/time.h>
+#include <signal.h>
+
 
 void error(const char *msg) {
     perror(msg);
@@ -20,6 +22,8 @@ double dwalltime(){
 }
 
 int main(int argc, char *argv[]) {
+
+    signal(SIGPIPE, SIG_IGN);
 
     if (argc < 3) {
         fprintf(stderr,"Uso: %s <hostname> <puerto>\n", argv[0]);
