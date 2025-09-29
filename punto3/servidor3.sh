@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "PUNTO 3: SERVIDOR" 
+echo "#### Servidor : Ejecutando servidor3.sh ####"
 cd /home/pdytr/punto3
 sudo gcc -o servidor server3.c
-nohup ./servidor 6902 > /home/vagrant/servidor_6902.log 2>&1 &
+nohup ./servidor 6902 &

@@ -1,13 +1,13 @@
 #!/bin/bash
 
 cd /home/pdytr/punto2
-sudo gcc -o cliente client-full.c
+gcc -o cliente client-full.c
 
 while true; do
-    sudo ./cliente 192.168.56.11 6901
+    ./cliente 192.168.56.11 6901
     rc=$?
     if [ $rc -eq 0 ]; then
-        echo "PUNTO 2: CLIENTE" 
+        echo "#### Cliente : Punto 2, conexión exitosa ####"
         break
     fi
     echo "CLIENTE: fallo al conectar. PERO NO ME RENDIRE! ESA CONEXION SE HARA DEMONIOS"

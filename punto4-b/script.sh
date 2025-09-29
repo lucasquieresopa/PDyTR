@@ -18,4 +18,4 @@ gcc -o servidor server3.c
 
 cd ..
 cd punto4-b
-vagrant up --provision
+vagrant up

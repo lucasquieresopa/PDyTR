@@ -4,7 +4,7 @@ cd /home/pdytr/punto3
 gcc -o cliente client3.c
 
 while true; do
-    ./cliente 192.168.56.11 6902
+    ./cliente 10.0.2.2 6902
     rc=$?
     if [ $rc -eq 0 ]; then
         echo "#### Cliente : Punto 3, conexión exitosa ####"

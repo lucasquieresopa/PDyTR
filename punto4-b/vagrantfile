@@ -27,17 +27,18 @@ Vagrant.configure("2") do |config|
 			sudo rm -rf /home/pdytr
 			git clone https://github.com/lucasquieresopa/PDyTR.git /home/pdytr
 
-			sudo chown -R vagrant:vagrant /home
-			echo "EJECUCION P2 CLIENTE"
+
+			echo "#### Cliente : Punto 2 en ejecución ####"
 			cd /home/pdytr/punto2
-			sudo chmod +x cliente2.sh
-			./cliente2.sh
-			echo "TEMRINA EJEC P2 CLIENTE"
-			echo "EJECUCION P3 CLIENTE"
+			sudo chmod +x cliente2-b.sh
+			./cliente2-b.sh
+			echo "#### Cliente : Punto 2 ejecutado, fin de la conexión ####"
+
+			echo "#### Cliente : Punto 3 en ejecución ####"
 			cd /home/pdytr/punto3
-			sudo chmod +x cliente3.sh
-			./cliente3.sh
-			echo "TERMINA P3 CLIENTE"
+			sudo chmod +x cliente3-b.sh
+			./cliente3-b.sh
+			echo "#### Cliente : Punto 3 ejecutado, fin de la conexión ####"
 
 			
 			cd /home/pdytr/punto2/
