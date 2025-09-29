@@ -124,8 +124,26 @@ Vagrant.configure("2") do |config|
 
 			echo "#### Cliente : Promedios calculados para el escenario 1 ####"
 			cd /home/pdytr/punto5/escenario-1
-			sudo gcc -o prom1 prom1.c -lm
-			./prom1
+			sudo gcc -o prom prom.c -lm
+			./prom
+			echo "############################################################"
+
+			echo "#### Cliente : Promedios calculados para el escenario 2 ####"
+			cd /home/pdytr/punto5/escenario-2
+			sudo gcc -o prom prom.c -lm
+			./prom
+			echo "############################################################"
+
+			echo "#### Cliente : Promedios calculados para el escenario 3 ####"
+			cd /home/pdytr/punto5/escenario-3
+			sudo gcc -o prom prom.c -lm
+			./prom
+			echo "############################################################"
+
+			echo "#### Cliente : Promedios calculados para el escenario 4 ####"
+			cd /home/pdytr/punto5/escenario-4
+			sudo gcc -o prom prom.c -lm
+			./prom
 			echo "############################################################"
 
 		SHELL
